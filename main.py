@@ -17,22 +17,27 @@ bot.updatePictures()
 
 fig = plt.figure()
 images = os.listdir(image_path)
-img = mpimg.imread(image_path + images[0])
+images.sort()
+img = mpimg.imread(image_path + images[-1])
 im = plt.imshow(img, animated=True)
-i = 1
+i = len(images)-1
 
 
 def updatefig(*args):
-    global i, bot
+    global images, i, bot
 
     if bot.getLastUpdateTime() + update_freq < time.time():
+        n_images = len(images)
         bot.updatePictures()
+        images = os.listdir(image_path)
+        images.sort()
+        if len(images) > n_images:
+            i = len(images)-1
 
-    images = os.listdir(image_path)
-    if len(images) <= i:
-        i = 0
+    if i < 0:
+        i = len(images)-1
     im.set_array(mpimg.imread(image_path + images[i]))
-    i += 1
+    i -= 1
     return im,
 
 ani = animation.FuncAnimation(fig, updatefig, interval=change_picture_freq * 1000, blit=True)

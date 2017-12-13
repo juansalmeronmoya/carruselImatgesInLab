@@ -15,6 +15,7 @@ class Bot(object):
         response = requests.get(self.getUpdatesUrl()).json()
         pre_update_time = self.getLastUpdateTime()
         pictures = [res['message'] for res in response['result'] if isAPhoto(res) and isNew(res, pre_update_time)]
+        print([res['message'] for res in response['result'] if isNew(res, pre_update_time)])
         for pic in pictures:
             self.downloadPicture(pic)
             if pic['date'] > self.last_update_time:
@@ -32,7 +33,7 @@ class Bot(object):
         response_file = requests.get(self.getInfoFileUrl(file_id)).json()
         response_image = requests.get(self.getImageUrl(response_file['result']['file_path']), stream=True)
         if response_image.status_code == 200:
-            with open(self.path + '/' + file_id + '.jpg', 'wb') as f:
+            with open(self.path + '/' + str(picture['date']) + '.jpg', 'wb') as f:
                 response_image.raw.decode_content = True
                 shutil.copyfileobj(response_image.raw, f)
 
