@@ -18,13 +18,13 @@ bot.updatePictures()
 fig = plt.figure()
 images = os.listdir(image_path)
 images.sort()
-img = mpimg.imread(image_path + images[-1])
-im = plt.imshow(img, animated=True)
 i = len(images)-1
 
 
 def updatefig(*args):
     global images, i, bot
+    img = mpimg.imread(image_path + images[-1])
+    im = plt.imshow(img, animated=True)
 
     if bot.getLastUpdateTime() + update_freq < time.time():
         n_images = len(images)
