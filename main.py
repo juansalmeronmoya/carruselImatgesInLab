@@ -15,16 +15,15 @@ bot_token = '471926478:AAECF2kaSTezJH7_fhIYAzGKKw3cNXQLZ7g'
 bot = Bot(bot_token, image_path)
 bot.updatePictures()
 
-fig = plt.figure()
+fig, ax = plt.subplots(figsize=(16, 9))
 images = os.listdir(image_path)
 images.sort()
 i = len(images)-1
 
-
 def updatefig(*args):
-    global images, i, bot
+    global images, i, bot, fig
     img = mpimg.imread(image_path + images[-1])
-    im = plt.imshow(img, animated=True)
+    im = plt.imshow(img, animated=True, aspect='auto')
 
     if bot.getLastUpdateTime() + update_freq < time.time():
         n_images = len(images)
@@ -40,7 +39,7 @@ def updatefig(*args):
     i -= 1
     return im,
 
-ani = animation.FuncAnimation(fig, updatefig, interval=change_picture_freq * 1000, blit=True)
+ani = animation.FuncAnimation(fig, updatefig, interval=change_picture_freq * 1000, blit=True, )
 
 ## Graffic configuration
 
