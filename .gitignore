@@ -4,3 +4,5 @@ ENV/
 __pycache__/
 
 \.idea/
+
+img/
