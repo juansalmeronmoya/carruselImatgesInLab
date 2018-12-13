@@ -89,8 +89,6 @@ class Slideshow(tkinter.Tk):
         self.mainloop()
 
     def get_images_from_disk(self):
-        import glob
-        images = glob.glob("*.jpg")
         exts = ["jpg", "bmp", "png", "gif", "jpeg"]
         images = [fn for fn in os.listdir(path) if any(fn.endswith(ext) for ext in exts)]
         images.sort()
