@@ -10,7 +10,7 @@ from Bot import Bot
 
 path = "./img"
 bot_image_path = 'img/'
-bot_token = '471926478:AAECF2kaSTezJH7_fhIYAzGKKw3cNXQLZ7g'
+bot_token = '737784048:AAEa_H2A8uhRZtkmCIhXydExBHV5RkwUpJs'
 
 
 class Slideshow(tkinter.Tk):
@@ -73,20 +73,20 @@ class Slideshow(tkinter.Tk):
         image = self.resize_image(image)
         self.image = ImageTk.PhotoImage(image)
         
-    def main(self):
+    def show_new_images(self):
         """Display the images"""
+        # bot.updatePictures()
         self.get_images_from_disk()
         self.set_images(self.images)
         self.set_image()
         self.slide.config(image=self.image)
         self.title(self.image_name)
-        #self.center()
-        self.after(self.slide_interval, self.start)
-    
+        self.center()
+        self.after(self.slide_interval, self.show_new_images)
+
     def start(self):
         """Start method"""
-        self.main()
-        bot.updatePictures()
+        self.after(self.slide_interval, self.show_new_images)
         self.mainloop()
 
     def get_images_from_disk(self):
@@ -98,6 +98,7 @@ class Slideshow(tkinter.Tk):
         if len(images) > len(self.images):
             self.images = images
             self.next_image_index = len(self.images) - 1
+
 
 if __name__ == "__main__":
     slide_interval = 2500
