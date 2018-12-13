@@ -3,8 +3,6 @@
 
 import os
 import tkinter
-
-from itertools import cycle, chain
 from PIL import Image, ImageTk
 from Bot import Bot
 
@@ -15,6 +13,7 @@ bot_token = '737784048:AAEa_H2A8uhRZtkmCIhXydExBHV5RkwUpJs'
 
 class Slideshow(tkinter.Tk):
     """Display a slideshow from a list of filenames"""
+
     def __init__(self, slide_interval, bot):
         """Initialize
         
@@ -33,8 +32,8 @@ class Slideshow(tkinter.Tk):
         self.bot = bot
 
     def set_images(self, images):
-         self.images = images
-    
+        self.images = images
+
     def update_index(self):
         self.next_image_index -= 1
         if self.next_image_index < 0:
@@ -52,16 +51,16 @@ class Slideshow(tkinter.Tk):
 
     def resize_image(self, image):
         size = image.size
-        w_dif = self.winfo_screenwidth() - size[0] 
+        w_dif = self.winfo_screenwidth() - size[0]
         h_dif = self.winfo_screenheight() - size[1]
         w_ratio = 1
         h_ratio = 1
         if w_dif < 0:
-            w_ratio = size[0]/self.winfo_screenwidth()
+            w_ratio = size[0] / self.winfo_screenwidth()
         if h_dif < 0:
-            h_ratio = size[1]/self.winfo_screenheight()
+            h_ratio = size[1] / self.winfo_screenheight()
         ratio = max(w_ratio, h_ratio)
-        image = image.resize((int(size[0]/ratio), int(size[1]/ratio)), Image.ANTIALIAS)
+        image = image.resize((int(size[0] / ratio), int(size[1] / ratio)), Image.ANTIALIAS)
         return image
 
     def set_image(self):
@@ -72,7 +71,7 @@ class Slideshow(tkinter.Tk):
         image = Image.open(path + '/' + self.image_name)
         image = self.resize_image(image)
         self.image = ImageTk.PhotoImage(image)
-        
+
     def show_new_images(self):
         """Display the images"""
         # bot.updatePictures()
@@ -81,7 +80,7 @@ class Slideshow(tkinter.Tk):
         self.set_image()
         self.slide.config(image=self.image)
         self.title(self.image_name)
-        self.center()
+        # self.center()
         self.after(self.slide_interval, self.show_new_images)
 
     def start(self):
@@ -102,18 +101,7 @@ class Slideshow(tkinter.Tk):
 
 if __name__ == "__main__":
     slide_interval = 2500
-    
-    # use a list
-    #images = ["image1.jpg",
-              #"image2.jpeg",
-              #"/home/pi/image3.gif",
-              #"/home/pi/images/image4.png",
-              #"images/image5.bmp"]
-    
-    # all the specified file types in a directory 
-    # "." us the directory the script is in.
-    # exts is the file extentions to use.  it can be any extention that pillow supports
-    # http://pillow.readthedocs.io/en/3.3.x/handbook/image-file-formats.html
+
     bot = Bot(bot_token, bot_image_path)
     bot.updatePictures()
 
