@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Display a slideshow from a list of filenames"""
 
 import os
 import tkinter
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageDraw, ImageFont
 from Bot import Bot
 
 path = "./img"
@@ -22,6 +21,7 @@ class Slideshow(tkinter.Tk):
         """
         tkinter.Tk.__init__(self)
         self.geometry("+0+0")
+        # self.state('zoomed')
         self.slide_interval = slide_interval
         self.images = []
         self.get_images_from_disk()
@@ -60,16 +60,23 @@ class Slideshow(tkinter.Tk):
         if h_dif < 0:
             h_ratio = size[1] / self.winfo_screenheight()
         ratio = max(w_ratio, h_ratio)
-        image = image.resize((int(size[0] / ratio), int(size[1] / ratio)), Image.ANTIALIAS)
+        final_w = int(size[0] / ratio)
+        final_h = int(size[1] / ratio)
+        image = image.resize((final_w, final_h), Image.ANTIALIAS)
         return image
 
     def set_image(self):
         """Setup image to be displayed"""
         self.image_name = self.images[self.next_image_index]
         self.update_index()
-        filename, ext = os.path.splitext(self.image_name)
+        # filename, ext = os.path.splitext(self.image_name)
         image = Image.open(path + '/' + self.image_name)
         image = self.resize_image(image)
+
+        draw = ImageDraw.Draw(image)
+        font = ImageFont.truetype("ariblk.ttf", 32)
+        draw.text((0, 0), "Sopar Nadal", (242, 144, 0), font=font)
+
         self.image = ImageTk.PhotoImage(image)
 
     def show_new_images(self):
