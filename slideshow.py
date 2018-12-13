@@ -74,7 +74,7 @@ class Slideshow(tkinter.Tk):
 
     def show_new_images(self):
         """Display the images"""
-        # bot.updatePictures()
+        bot.updatePictures()
         self.get_images_from_disk()
         self.set_images(self.images)
         self.set_image()
