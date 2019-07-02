@@ -7,6 +7,7 @@ from Bot import Bot
 
 path = "./img"
 bot_image_path = 'img/'
+# El nombre del bot es @inlab-2018, creado por JuanjoVG
 bot_token = '737784048:AAEa_H2A8uhRZtkmCIhXydExBHV5RkwUpJs'
 
 
@@ -75,7 +76,7 @@ class Slideshow(tkinter.Tk):
 
         draw = ImageDraw.Draw(image)
         font = ImageFont.truetype("ariblk.ttf", 32)
-        draw.text((0, 0), "Sopar Nadal", (242, 144, 0), font=font)
+        draw.text((0, 0), "Sopar estiu 2019", (242, 144, 0), font=font)
 
         self.image = ImageTk.PhotoImage(image)
 
