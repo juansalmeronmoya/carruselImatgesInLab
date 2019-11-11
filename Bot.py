@@ -11,6 +11,13 @@ class Bot(object):
         self.last_download_picture_time = self.getLastDownloadedPictureTimeFromFiles()
         self.telegram_url = 'https://api.telegram.org/'
 
+    def download_all_pictures(self):
+        response = requests.get(self.getMessagesUrl()).json()
+        pictures = [res['message'] for res in response['result'] if self.isAPhoto(res) and self.isNew(res)]
+        print(pictures)
+        for pic in pictures:
+            self.downloadPicture(pic)
+
     def updatePictures(self):
         response = requests.get(self.getUpdatesUrl()).json()
         pictures = [res['message'] for res in response['result'] if self.isAPhoto(res) and self.isNew(res)]
@@ -25,6 +32,10 @@ class Bot(object):
 
     def getUpdatesUrl(self):
         return self.telegram_url + 'bot' + self.token + '/getupdates'
+
+    def getMessagesUrl(self):
+        # TODO: search api method for getting group history
+        return self.telegram_url + 'bot' + self.token + '/REPLACE_WITH_GETHISTORY'
 
     def downloadPicture(self, picture):
         print('Downloading new picture...')
