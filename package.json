@@ -1,0 +1,23 @@
+{
+  "name": "carrusel_imatges_inlab",
+  "version": "1.0.0",
+  "description": "### How it works Basically is an image slideshow that downloads images from a telegram group and show them realtime. The slideshow order is from newest to oldest.  If a new image is sent to the group, then the slideshow restarts immediately from the newest. Images are downloaded once and only are downloaded those added to the group while the slideshow is running (this can be changed)",
+  "main": "index.js",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jnssterrass/carruselImatgesInLab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jnssterrass/carruselImatgesInLab/issues"
+  },
+  "homepage": "https://github.com/jnssterrass/carruselImatgesInLab#readme"
+}
