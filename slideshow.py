@@ -74,9 +74,9 @@ class Slideshow(tkinter.Tk):
         image = Image.open(path + '/' + self.image_name)
         image = self.resize_image(image)
 
-        draw = ImageDraw.Draw(image)
-        font = ImageFont.truetype("ariblk.ttf", 32)
-        draw.text((0, 0), "Sopar estiu 2019", (242, 144, 0), font=font)
+        # draw = ImageDraw.Draw(image)
+        # font = ImageFont.truetype("ariblk.ttf", 32)
+        # draw.text((0, 0), "Sopar estiu 2019", (242, 144, 0), font=font)
 
         self.image = ImageTk.PhotoImage(image)
 
