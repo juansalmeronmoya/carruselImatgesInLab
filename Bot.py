@@ -13,7 +13,7 @@ class Bot(object):
 
     def updatePictures(self):
         response = requests.get(self.getUpdatesUrl()).json()
-        pictures = [res['message'] for res in response['result'] if self.isAPhoto(res) and self.isNew(res)]
+        pictures = [res['message'] for res in response['result'] if 'message' in res.keys() and self.isAPhoto(res) and self.isNew(res)]
         print(pictures)
         for pic in pictures:
             self.downloadPicture(pic)
