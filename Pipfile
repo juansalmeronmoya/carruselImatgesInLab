@@ -12,10 +12,9 @@ python-dateutil = "==2.7.3"
 pytz = "==2018.5"
 requests = "==2.19.1"
 six = "==1.11.0"
-
-
 Cycler = "==0.10.0"
 pipenv="2022.1.8"
+pillow = "==9.0.1"
 
 [dev-packages]
 
