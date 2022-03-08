@@ -52,14 +52,14 @@ class Slideshow(tkinter.Tk):
 
     def resize_image(self, image):
         size = image.size
-        w_dif = self.winfo_screenwidth() - size[0]
-        h_dif = self.winfo_screenheight() - size[1]
+        w_dif = self.winfo_width() - size[0]
+        h_dif = self.winfo_height() - size[1]
         w_ratio = 1
         h_ratio = 1
         if w_dif < 0:
-            w_ratio = size[0] / self.winfo_screenwidth()
+            w_ratio = size[0] / self.winfo_width()
         if h_dif < 0:
-            h_ratio = size[1] / self.winfo_screenheight()
+            h_ratio = size[1] / self.winfo_height()
         ratio = max(w_ratio, h_ratio)
         final_w = int(size[0] / ratio)
         final_h = int(size[1] / ratio)
