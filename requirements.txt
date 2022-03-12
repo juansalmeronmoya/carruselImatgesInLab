@@ -15,7 +15,7 @@ idna==2.7
 kiwisolver==1.0.1
 matplotlib==2.2.2
 numpy==1.14.5
-pillow==5.2.0
+pillow==9.0.1
 pip==22.0.4; python_version >= '3.7'
 pipenv==2022.1.8
 platformdirs==2.5.1; python_version >= '3.7'
