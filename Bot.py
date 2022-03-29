@@ -1,3 +1,4 @@
+import hashlib
 import os
 import shutil
 
@@ -13,7 +14,8 @@ class Bot(object):
 
     def updatePictures(self):
         response = requests.get(self.getUpdatesUrl()).json()
-        pictures = [res['message'] for res in response['result'] if 'message' in res.keys() and self.isAPhoto(res) and self.isNew(res)]
+        pictures = [res['message'] for res in response['result'] if
+                    'message' in res.keys() and self.isAPhoto(res) and self.isNew(res)]
         print(pictures)
         for pic in pictures:
             self.downloadPicture(pic)
@@ -32,7 +34,7 @@ class Bot(object):
         response_file = requests.get(self.getInfoFileUrl(file_id)).json()
         response_image = requests.get(self.getImageUrl(response_file['result']['file_path']), stream=True)
         if response_image.status_code == 200:
-            with open(self.path + '/' + str(picture['date']) + '.jpg', 'wb') as f:
+            with open(self.path + '/' + str(picture['date']) + '_' + response_file['result']['file_unique_id'] + '.jpg', 'wb') as f:
                 response_image.raw.decode_content = True
                 shutil.copyfileobj(response_image.raw, f)
 
@@ -52,4 +54,4 @@ class Bot(object):
         exts = ["jpg", "bmp", "png", "gif", "jpeg"]
         images = [fn for fn in os.listdir(self.path) if any(fn.endswith(ext) for ext in exts)]
         images.sort()
-        return int(os.path.splitext(images.pop())[0])
+        return int(os.path.splitext(images.pop())[0].split('_')[0])
